@@ -1,5 +1,4 @@
-- name: Machine set up
-  user: root
+- name: My first play
   hosts: local
   become: true
   tasks:
@@ -16,7 +15,7 @@
       - python3
       state: latest
       update_cache: yes
-
+  
   - name: Set a hostname
     ansible.builtin.hostname:
       name: NEW-NAME-01
@@ -26,7 +25,7 @@
       name: tst-grp
       state: present
 
-  - name: Creating user and adding it to sudo group
+  - name: Creating users and adding them in the same group
     ansible.builtin.user:
       name: "{{ item.name }}"
       comment: "{{ item.comment }}"
