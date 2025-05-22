@@ -4,7 +4,7 @@ In this repository, I will be adding my Ansible playbooks along with a brief exp
 
 ---
 
-## 📜 Playbook: `my_first_playbook.yaml`
+## 📜 Playbook: set_up_playbook.yaml`
 
 This playbook performs the following tasks on the local machine:
 
