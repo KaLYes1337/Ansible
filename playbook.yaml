@@ -1,0 +1,40 @@
+- name: Machine set up
+  user: root
+  hosts: local
+  become: true
+  tasks:
+
+  - name: Updating packages
+    ansible.builtin.apt:
+      update_cache: yes
+
+  - name: Install htop, curl, python
+    ansible.builtin.apt:
+      name:
+      - htop
+      - curl
+      - python3
+      state: latest
+      update_cache: yes
+
+  - name: Set a hostname
+    ansible.builtin.hostname:
+      name: NEW-NAME-01
+
+  - name: Creating the group "tst-grp"
+    ansible.builtin.group:
+      name: tst-grp
+      state: present
+
+  - name: Creating user and adding it to sudo group
+    ansible.builtin.user:
+      name: "{{ item.name }}"
+      comment: "{{ item.comment }}"
+      groups: "{{ item.groups }}"
+      shell: /bin/bash
+      create_home: yes
+      append: yes
+    loop:
+      - { name: "John", comment: "John John", groups: "tst-grp"}
+      - { name: "Ivan", comment: " Ivan Ivan", groups: "tst-grp"}
+      - { name: "Petar", comment: "Petar", groups: "tst-grp"}
